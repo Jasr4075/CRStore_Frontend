@@ -90,7 +90,7 @@ const persist = async (req, res) => {
 const create = async (token, data, res) => {
   try {
     let { zip_code, state, city, street, district, number } = data;
-   
+  
 
     console.log(data);
     let response = await Adress.create({
