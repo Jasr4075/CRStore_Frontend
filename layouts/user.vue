@@ -32,17 +32,18 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
+      <v-spacer />
     </v-app-bar>
     <v-main>
       <v-container>
-        <Nuxt />
+        <Nuxt/>
       </v-container>
     </v-main>
     <v-footer
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ `${new Date().getFullYear()} | CRStore `}}</span>
+      <span>&copy; {{ `${new Date().getFullYear()} | CRStore` }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -59,40 +60,23 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Home',
-          to: '/homeAdmin'
+          to: '/homeUser'
+        },
+        {
+          icon: 'mdi-cart-outline',
+          title: 'Cart',
+          to: '/users/cart'
         },
         {
           icon: 'mdi-list-box-outline',
-          title: 'Items',
-          to: '/items'
+          title: 'Order',
+          to: 'orders/'
         },
         {
-          icon: 'mdi-shape',
-          title: 'Categories',
-          to: '/categories'
-        },
-        {
-          icon: 'mdi-sale',
-          title: 'Discount Coupons',
-          to: '/discountCoupons'
-        },
-        {
-          icon: 'mdi-account',
-          title: 'Users',
-          to: '/users'
-          
-        },
-        {
-          icon: 'mdi-credit-card',
-          title: 'Payments',
-          to: '/payments'
-        },
-        {
-          icon: 'mdi-map-marker',
-          title: 'Addresses',
+          icon: 'mdi-map-marker-outline',
+          title: 'My Addresses',
           to: '/addresses'
         },
-        
       ],
       miniVariant: false,
       right: true,

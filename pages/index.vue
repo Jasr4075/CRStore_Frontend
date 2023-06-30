@@ -1,87 +1,109 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-table>
+      <v-row>
+        <v-col>
+          <v-container style="margin-top:25%; font-size:50px; margin-left:100px">
+            <h1 style="font-size:50px;">
+              Bem-Vindo
+              <br>
+              Faça seu login na CRStore!
+            </h1>
+              <h3 style="font-size:25%">
+                Ainda não tem cadastro? Faça um por <a href="./register">aqui!</a>
+              </h3>
+          </v-container>
+        </v-col>
+        <v-col>
+          <v-form v-model="valid" style=" border:medium">
+            <v-container style="width:75%; margin-left: 5%; border-radius: 1%; background-color: #202024; margin-top:100px; margin-right:200px; font-size: 25px; padding-top: 50px; padding-left: 50px; padding-right: 50px;padding-bottom: 50px;">
+              <v-text-field
+                v-model="user.username"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Username"
+                prepend-inner-icon="mdi-account"
+                color="#593e99"
+                background-color="#121214"
+              />
+              <v-text-field
+                v-model="user.password"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Password"
+                prepend-inner-icon="mdi-lock"
+                color="#593e99"
+                background-color="#121214"
+                :append-icon="show1 ? 'mdi-eye-off' : 'mdi-eye'"
+                :type="show1 ? 'text' : 'password'"
+                @click:append="show1 = !show1"
+              />
+              <h3
+                style="font-size:small; color:#6e4cbf; margin-top:-7%"
+              >
+                Esqueci minha senha
+              </h3>
+              <v-btn
+                style="background-color: #41356b; margin-top: 5%; margin-left: 35%;"
+                @click="login"
+              >
+                ENTRAR 
+              </v-btn>
+            </v-container>
+          </v-form>
+        </v-col>
+      </v-row>
+    </v-table>
+  </v-container>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
+  layout: 'login',
+
+  data() {
+    return {
+      show1: false,
+      valid: false,
+      user: {
+        username: null,
+        password: null
+      },
+      rule: [
+        v => !!v || 'Required field'
+      ]
+    }
+  },
+
+  methods: {
+    async login () {
+      
+      if (!this.valid) {
+        return this.$toast.warning('The registration form is not valid!')
+      } else {
+      const response = await this.$axios.$post('http://localhost:3333/users/login', this.user);
+
+        if (!response.token) {
+          return this.$toast.info('Username or password invalid!')
+        } else {
+        this.$toast.success('Welcome back!')
+        localStorage.setItem('crstore-api-token', response.token);
+        this.validate(response.role);
+      }
+    }
+    },
+    // eslint-disable-next-line require-await
+    async validate (role) {
+      // eslint-disable-next-line eqeqeq
+      if (role == "customer") {
+        this.$router.push('/homeUser');
+      } else {
+        this.$router.push('/homeAdmin');
+      }
+    }
+  }
 }
 </script>
