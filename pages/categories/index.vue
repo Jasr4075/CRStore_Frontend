@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+    <v-container>
     <h1>Categories Query</h1>
     <hr>
     <v-container>
@@ -107,14 +107,14 @@ export default {
             } catch (error) {
             this.$toast.error('An error occurred while fulfilling the request. Contact the ADM.')
         }
-     },
+        },
     // eslint-disable-next-line require-await
     async editItem (category) {
-      this.$router.push({
+        this.$router.push({
         name: 'categories-newCategory',
         params: { id: category.id }
-      });
+        });
     }
-  }
+    }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<v-container style="background-color: lightgray">
+<v-container style="background-color: rgb(64, 37, 184)">
     <v-container>
       <v-container>
       <h1

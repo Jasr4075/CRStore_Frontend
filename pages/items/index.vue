@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+    <v-container>
     <h1>Items Query</h1>
     <hr>
     <v-container>
@@ -32,10 +32,10 @@
     </v-container>
     <v-container>
         <v-data-table
-         :headers="headers"
-         :items="items"
-         :items-per-page="10"
-         class="elevation-1"
+            :headers="headers"
+            :items="items"
+            :items-per-page="10"
+            class="elevation-1"
         >
         <template #[`item.actions`]="{ item }">
             <v-icon
@@ -58,16 +58,16 @@
             R$ {{ item.price }}
         </template>
 <template #no-data>
-  <v-btn
+    <v-btn
     color="primary"
     @click="initialize"
-  >
+    >
     Reset
-  </v-btn>
+    </v-btn>
 </template>
         </v-data-table>
     </v-container>
-  </v-container>
+    </v-container>
 </template>
 
 <script>
@@ -122,14 +122,14 @@ export default {
             } catch (error) {
             this.$toast.error('An error occurred while fulfilling the request. Contact the ADM.')
         }
-     },
+        },
     // eslint-disable-next-line require-await
     async editItem (item) {
-      this.$router.push({
+        this.$router.push({
         name: 'items-newItem',
         params: { id: item.id }
-      });
+        });
     }
-  }
+    }
 }
 </script>

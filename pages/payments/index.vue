@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>Accepted Payment Methods Query</h1>
+    <h1>Consulta de métodos de pago aceptados</h1>
     <hr>
     <v-container>
         <v-row>
@@ -55,16 +55,16 @@
             </v-icon>
         </template>
 <template #no-data>
-  <v-btn
+    <v-btn
     color="primary"
     @click="initialize"
-  >
+    >
     Reset
-  </v-btn>
+    </v-btn>
 </template>
         </v-data-table>
     </v-container>
-  </v-container>
+    </v-container>
 </template>
 
 <script>
@@ -107,14 +107,14 @@ export default {
             } catch (error) {
             this.$toast.error('An error occurred while fulfilling the request. Contact the ADM.')
         }
-     },
+        },
     // eslint-disable-next-line require-await
     async editItem (payment) {
-      this.$router.push({
+        this.$router.push({
         name: 'payments-newPayment',
         params: { id: payment.id }
-      });
+        });
     }
-  }
+    }
 }
 </script>

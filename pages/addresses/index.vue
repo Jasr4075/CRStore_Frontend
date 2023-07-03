@@ -1,6 +1,6 @@
 <template>
     <v-container>
-    <h1>Your Addresses</h1>
+    <h1>Endereços</h1>
     <hr>
     <br>
     <v-container>

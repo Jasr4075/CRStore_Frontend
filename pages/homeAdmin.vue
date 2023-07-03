@@ -1,10 +1,11 @@
+<!-- eslint-disable vue/no-template-shadow -->
 <template>
   <v-app class="font">
     <v-container>
       <v-col>
         <v-row>
           <v-card
-            color="green"
+            color="#41356b"
             style="margin: 10px"
             align="center"
             width="200px"
@@ -13,7 +14,7 @@
             <v-card-text>Editar produtos</v-card-text>
           </v-card>
           <v-card
-            color="green"
+            color="#41356b"
             style="margin: 10px"
             align="center"
             width="200px"
@@ -70,14 +71,15 @@
               dense 
             ></v-text-field>
             <v-autocomplete
-            v-model="item.idCategory"
+              v-model="category"
               :items="categories"
-              item-value="id"
               item-text="name"
+              item-value="id"
               type="text"
-              filled
-              solo
+              label="Categoria"
               dense
+              filled
+              solo-inverted
             ></v-autocomplete>
             <v-row>
               <v-col align=center>
@@ -149,19 +151,19 @@
                     solo
                     dense
                   ></v-text-field>
-                    <v-autocomplete
-                    v-model="item.idCategory"
-                    :items="categories"
-                    item-text="name"
-                    item-value="id"
-                    dense
-                    filled
-                    solo-inverted
-                    label="Categoria"
+                  <v-autocomplete
+                  v-model="category"
+                  :items="categories"
+                  item-text="name"
+                  item-value="id"
+                  label="Categories"
+                  dense
+                  filled
+                  solo-inverted
                   ></v-autocomplete>
                   <v-col align=center>
                     <v-btn
-                      color="green"
+                      color="#A76CB3"
                       @click="createItem()"
                     >Criar</v-btn>
                   </v-col>
@@ -254,9 +256,10 @@
 export default {
   data () {
     return {
-      items: [],
       item: {},
+      items: [],
       categories: [],
+      category: null,
       isEditing: false,
       isCreating: false,
     }
