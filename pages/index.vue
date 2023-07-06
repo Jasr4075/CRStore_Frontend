@@ -3,7 +3,7 @@
     <v-table>
       <v-row>
         <v-col>
-          <v-container style="margin-top: 25%; font-size: 50px; margin-left: 100px">
+          <v-container class="animate-character" style="margin-top: 25%; font-size: 50px; margin-left: 100px">
             <h1 style="font-size: 50px;">
               Bem-Vindo
               <br>
@@ -26,7 +26,7 @@
                 prepend-inner-icon="mdi-account"
                 color="#593e99"
                 background-color="#121214"
-              />
+              ></v-text-field>
               <v-text-field
                 v-model="user.password"
                 outlined
@@ -39,7 +39,7 @@
                 :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                 :type="showPassword ? 'text' : 'password'"
                 @click:append="showPassword = !showPassword"
-              />
+              ></v-text-field>
               <h3 style="font-size: small; color: #6e4cbf; margin-top: -7%" href="./">
                 Esqueci minha senha
               </h3>
@@ -113,3 +113,34 @@ export default {
   }
 }
 </script>
+
+<style>
+.animate-character {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
+  font-size: 190px;
+}
+
+@keyframes textclip {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+</style>

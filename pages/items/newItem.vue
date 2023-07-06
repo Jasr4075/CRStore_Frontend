@@ -30,16 +30,16 @@
             </v-col>
             <v-col>
               <v-text-field
-                v-model="item.price"
-                :rules="rule"
-                aria-required="outlined"
-                label="Price"
+              v-model="item.price"
+              :rules="rule"
+              aria-required="outlined"
+              label="Price"
               ></v-text-field>
             </v-col>
             <v-col>
                 <v-autocomplete
-              v-model="item.idCategory"
-              :items="category"
+              v-model="item.id.Category"
+              :items="Category"
               :rules="rule"
               required
               outlined
@@ -97,7 +97,7 @@ export default {
           ]
         }
     },
-      created () {
+      createdAt () {
 
           if (this.$route?.params?.id) {
           this.getById(this.$route.params.id)

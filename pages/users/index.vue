@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+    <v-container>
     <h1>Users Query</h1>
     <hr>
     <v-container>
@@ -32,40 +32,32 @@
     </v-container>
     <v-container>
         <v-data-table
-         :headers="headers"
-         :items="users"
-         :items-per-page="10"
-         class="elevation-1"
+            :headers="headers"
+            :items="users"
+            :items-per-page="10"
+            class="elevation-1"
         >
-        <template #[`tem.actions`]="{ item }">
-            <v-icon
-                small
-                class="mr-2"
-                color="blue"
-                @click="editItem(item)"
-            >
-                mdi-pencil
-            </v-icon>
+        <template #[`item.actions`]="{ item }">
             <v-icon
                 small
                 color="red"
-                @click="deleteItem(item)"
+                @click="deleteUser(item)"
             >
                 mdi-delete
             </v-icon>
         </template>
 <template #no-data>
-  <v-btn
-    color="primary"
-    @click="initialize"
-  >
-    Reset
-  </v-btn>
-</template>
-        </v-data-table>
+    <v-btn
+        color="primary"
+        @click="initialize"
+    >
+        Reset
+    </v-btn>
+    </template>
+            </v-data-table>
+        </v-container>
     </v-container>
-  </v-container>
-</template>
+    </template>
 
 <script>
 export default {
@@ -109,7 +101,15 @@ export default {
         async getUsers () {
             const response = await this.$axios.$get('http://localhost:3333/users');
             this.users = response.data;
-        }
-    }
+        },
+        async deleteUser (user) {
+            try {
+                await this.$api.delete(`http://localhost:3333/users/${user.id}`);
+                this.getUsers();
+            } catch (error) {
+                this.$toast.error(error.response.data.message);
+            }
+        },
+},
 }
 </script>

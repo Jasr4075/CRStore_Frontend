@@ -71,7 +71,7 @@
               dense 
             ></v-text-field>
             <v-autocomplete
-              v-model="category"
+              v-model="item.idCategory"
               :items="categories"
               item-text="name"
               item-value="id"
@@ -259,9 +259,9 @@ export default {
       item: {},
       items: [],
       categories: [],
-      category: null,
-      isEditing: false,
       isCreating: false,
+      isEditing: false,
+      category: null,
     }
   },
   created () {

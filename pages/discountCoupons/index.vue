@@ -32,10 +32,10 @@
     </v-container>
     <v-container>
         <v-data-table
-         :headers="headers"
-         :items="discountCoupons"
-         :items-per-page="10"
-         class="elevation-1"
+            :headers="headers"
+            :items="discountCoupons"
+            :items-per-page="10"
+            class="elevation-1"
         >
         <template #[`item.actions`]="{ item }">
             <v-icon
@@ -55,17 +55,17 @@
             </v-icon>
         </template>
 <template #no-data>
-  <v-btn
-    color="primary"
-    @click="initialize"
-  >
-    Reset
-  </v-btn>
-</template>
-        </v-data-table>
+    <v-btn
+        color="primary"
+        @click="initialize"
+    >
+        Reset
+    </v-btn>
+    </template>
+            </v-data-table>
+        </v-container>
     </v-container>
-  </v-container>
-</template>
+    </template>
 
 <script>
 export default {
@@ -113,14 +113,14 @@ export default {
             } catch (error) {
             this.$toast.error('An error occurred while fulfilling the request. Contact the ADM.')
         }
-     },
-    // eslint-disable-next-line require-await
-    async editItem (discountCoupon) {
-      this.$router.push({
-        name: 'discountCoupons-newDiscountCoupon',
-        params: { id: discountCoupon.id }
-      });
+        },
+        // eslint-disable-next-line require-await
+        async editItem (discountCoupon) {
+        this.$router.push({
+            name: 'discountCoupons-newDiscountCoupon',
+            params: { id: discountCoupon.id }
+        });
+        }
     }
-  }
 }
 </script>

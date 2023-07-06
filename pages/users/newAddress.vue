@@ -1,11 +1,11 @@
 <template>
-    <v-container>
-    <h1>New Address</h1>
-    <hr>
-    <v-form v-model="valid">
-    <v-container>
-        <v-row>
-            <v-col>
+        <v-container>
+        <h1>New Address</h1>
+        <hr>
+        <v-form v-model="valid">
+            <v-container>
+            <v-row>
+                <v-col>
                 <v-text-field
                     v-model="address.street"
                     placeholder="Street"
@@ -13,12 +13,11 @@
                     required
                     label="Street"
                     outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
                 <v-text-field
                     v-model="address.neighborhood"
                     placeholder="Neighborhood"
@@ -26,12 +25,11 @@
                     required
                     label="Neighborhood"
                     outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
                 <v-text-field
                     v-model="address.address"
                     placeholder="Address"
@@ -39,12 +37,11 @@
                     required
                     label="Address"
                     outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
                 <v-text-field
                     v-model="address.number"
                     placeholder="Number"
@@ -52,12 +49,11 @@
                     required
                     label="Number"
                     outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
                 <v-text-field
                     v-model="address.complement"
                     placeholder="Complement"
@@ -65,66 +61,54 @@
                     required
                     label="Complement"
                     outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-    </v-container>
-    </v-form>
-    <v-btn
-        outlined
-        to="/addresses"
-    >
-    Cancel
-    </v-btn>
-    <v-btn
-        outlined
-        @click="persist"
-    >
-    Save
-    </v-btn>
-    </v-container>
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            </v-container>
+        </v-form>
+        <v-btn outlined to="/addresses">Cancel</v-btn>
+        <v-btn outlined @click="persist">Save</v-btn>
+        </v-container>
 </template>
 
 <script>
-export default {
-    name: 'NewAddressPage',
-    layout: 'user',
-    data () {
+    export default {
+        name: 'NewAddressPage',
+        layout: 'user',
+        data() {
         return {
             valid: false,
             address: {
-                id: null,
-                street: null,
-                neighborhood: null,
-                address: null,
-                number: null,
-                complement:null
+            id: null,
+            street: null,
+            neighborhood: null,
+            address: null,
+            number: null,
+            complement: null
             },
             rule: [
-                v => !!v || 'Required field'
+            v => !!v || 'Required field'
             ]
         }
-    },
-        created () {
-            if (this.$route?.params?.id) {
-            this.getById(this.$route.params.id);
-            }
         },
-    
-    methods: {
-        async persist () {
+        created() {
+        if (this.$route?.params?.id) {
+            this.getById(this.$route.params.id);
+        }
+        },
+        methods: {
+        async persist() {
             try {
             if (!this.valid) {
-                return this.$toast.warning('The registration form is not valid!')
+                return this.$toast.warning('The registration form is not valid!');
             }
             const address = {
-            address: this.address.address,
-            street: this.address.street,
-            neighborhood: this.address.neighborhood,
-            number: this.address.number,
-            complement: this.address.complement
-            }
+                address: this.address.address,
+                street: this.address.street,
+                neighborhood: this.address.neighborhood,
+                number: this.address.number,
+                complement: this.address.complement
+            };
             if (!this.address.id) {
                 await this.$api.post('/addresses/persist', address);
                 this.$toast.success('Registration successfully completed!');
@@ -137,9 +121,10 @@ export default {
             this.$toast.error('An error occurred while registering!');
             }
         },
-        async getById (id) {
-        this.address = await this.$api.get(`/addresses/${id}`);
+        async getById(id) {
+            this.address = await this.$api.get(`/addresses/${id}`);
         }
-    }
-  }
-</script>
+        }
+    };
+    </script>
+    
