@@ -121,7 +121,7 @@ export default {
     -225deg,
     #231557 0%,
     #44107a 29%,
-    #ff1361 67%,
+    hsl(340, 100%, 54%) 67%,
     #fff800 100%
   );
   background-size: 200% auto;

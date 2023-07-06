@@ -25,23 +25,23 @@ v-for="item in carts" :key="item.id" elevation="24"
                 R$ {{ carts[0].item.price }} | {{ carts.amount }}
             </v-card-subtitle>
             <v-btn
-          style="background-color:blue; margin-left: 5%;  margin-right: 5%; bottom: 2%;"
-          outlined
-          @click="editItem()"
+            style="background-color:blue; margin-left: 5%;  margin-right: 5%; bottom: 2%;"
+            outlined
+            @click="editItem()"
         >
-          EDITAR
+            EDITAR
         </v-btn>
         <v-btn
-          style="background-color:red; margin-left: 5%;  margin-right: 5%; bottom: 2%;"
-          outlined
-          @click="deleteItem()"
-        >
-          REMOVER
+            style="background-color:red; margin-left: 5%;  margin-right: 5%; bottom: 2%;"
+            outlined
+            @click="deleteItem()"
+            >
+            REMOVER
         </v-btn>
         </v-card>
         </v-row>
     </v-container>
-  </v-container>
+    </v-container>
 </template>
 
 <script>
@@ -85,7 +85,7 @@ export default {
             } catch (error) {
             this.$toast.error('An error occurred while fulfilling the request. Contact the ADM.')
         }
-     },
+        },
         // eslint-disable-next-line require-await
         async editItem (carts) {
         this.$router.push({
