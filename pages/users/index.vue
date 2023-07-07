@@ -37,7 +37,7 @@
             :items-per-page="10"
             class="elevation-1"
         >
-        <template #[`item.actions`]="{ item }">
+        <template #[`,item.actions`]="{ item }">
             <v-icon
                 small
                 color="red"
@@ -110,6 +110,6 @@ export default {
                 this.$toast.error(error.response.data.message);
             }
         },
-},
+    },
 }
 </script>

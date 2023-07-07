@@ -70,7 +70,7 @@ export default {
         {
           icon: 'mdi-list-box-outline',
           title: 'Order',
-          to: '/orders'
+          to: '/users/order/order'
         },
         {
           icon: 'mdi-map-marker-outline',

@@ -64,7 +64,7 @@ export default {
         {
           icon: 'mdi-list-box-outline',
           title: 'Items',
-          to: '/items/index'
+          to: '/items'
         },
         {
           icon: 'mdi-shape',

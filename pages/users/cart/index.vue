@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <v-container>
+    <v-container>
     <h1>Meu Carrinho</h1>
     <hr>
     <br>

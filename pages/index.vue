@@ -10,7 +10,7 @@
               Faça seu login na CRStore!
             </h1>
             <h3 style="font-size: 25%">
-              Ainda não tem cadastro? Faça o seu por <a href="./register">aqui!</a>
+              Ainda não tem cadastro? Faça o seu por <button id="btaqui"> <a href="./register">aqui!</a></button>
             </h3>
           </v-container>
         </v-col>
@@ -125,7 +125,7 @@ export default {
     #fff800 100%
   );
   background-size: 200% auto;
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 5s linear infinite;
   display: inline-block;
@@ -143,4 +143,6 @@ export default {
     background-position: 0% center;
   }
 }
+
+
 </style>
