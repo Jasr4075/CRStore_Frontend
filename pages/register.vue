@@ -1,127 +1,157 @@
 <template>
     <v-container>
-    <h1>Register</h1>
-    <hr>
-    <v-form v-model="valid">
-    <v-container>
+      <v-table>
         <v-row>
-            <v-col>
+          <v-col>
+            <v-container class="animate-character" style="margin-top: 25%; font-size: 50px; margin-left: 100px">
+              <h4 style="font-size: 50px;">
+                    crie o seu usuario na CRSTORE!
+                </h4>
+            </v-container>
+          </v-col>
+          <v-col>
+            <v-form v-model="valid" style="border: medium" @submit.prevent="persist">
+              <v-container style="width: 75%; margin-left: 5%; border-radius: 1%; background-color: #202024; margin-top: 100px; margin-right: 200px; font-size: 25px; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
                 <v-text-field
-                    v-model="user.username"
-                    placeholder="Username"
-                    :rules="rule"
-                    required
-                    label="Username"
-                    outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                  v-model="user.username"
+                  outlined
+                  :rules="usernameRules"
+                  required
+                  placeholder="Nombre de usuario"
+                  prepend-inner-icon="mdi-account"
+                  color="#593e99"
+                  background-color="#121214"
+                ></v-text-field>
                 <v-text-field
-                    v-model="user.name"
-                    placeholder="Name"
-                    :rules="rule"
-                    required
-                    label="Name"
-                    outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                  v-model="user.name"
+                  outlined
+                  :rules="nameRules"
+                  required
+                  placeholder="Nombre"
+                  prepend-inner-icon="mdi-account"
+                  color="#593e99"
+                  background-color="#121214"
+                ></v-text-field>
                 <v-text-field
-                    v-model="user.phone"
-                    placeholder="Phone"
-                    :rules="rule"
-                    required
-                    label="Phone"
-                    outlined
-                >
-                </v-text-field>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
+                  v-model="user.phone"
+                  outlined
+                  :rules="phoneRules"
+                  required
+                  placeholder="Teléfono"
+                  prepend-inner-icon="mdi-phone"
+                  color="#593e99"
+                  background-color="#121214"
+                ></v-text-field>
                 <v-text-field
-                    v-model="user.password"
-                    placeholder="Password"
-                    :rules="rule"
-                    required
-                    label="Password"
-                    outlined
-                    :append-icon="show1 ? 'mdi-eye-off' : 'mdi-eye'"
-                    :type="show1 ? 'text' : 'password'"
-                    @click:append="show1 = !show1"
+                  v-model="user.password"
+                  outlined
+                  :rules="passwordRules"
+                  required
+                  placeholder="Contraseña"
+                  prepend-inner-icon="mdi-lock"
+                  color="#593e99"
+                  background-color="#121214"
+                  :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                  :type="showPassword ? 'text' : 'password'"
+                  @click:append="showPassword = !showPassword"
+                ></v-text-field>
+                <v-btn
+                  style="background-color: #41356b; margin-top: 5%; margin-left: 35%;"
+                  :disabled="!valid"
+                  type="submit"
                 >
-                </v-text-field>
-            </v-col>
+                  Registrarse
+                </v-btn>
+              </v-container>
+            </v-form>
+          </v-col>
         </v-row>
+      </v-table>
     </v-container>
-    </v-form>
-    <v-btn
-        outlined
-        to="/"
-    >
-    Cancel
-    </v-btn>
-    <v-btn
-        outlined
-        @click="persist"
-    >
-    Save
-    </v-btn>
-    </v-container>
-</template>
-
-<script>
-export default {
+  </template>
+  
+  <script>
+  export default {
     name: 'RegisterPage',
     layout: 'login',
-    data () {
-        return {
-            show1: false,
-            valid: false,
-            user: {
-                id: null,
-                name: null,
-                username: null,
-                phone: null,
-                password: null
-            },
-            rule: [
-                v => !!v || 'Required field'
-            ]
-        }
-    },
-    
-    methods: {
-        async persist () {
-            try {
-                // primeiro valida si el formulario esta lleno
-                if (!this.valid) {
-                    return this.$toast.warning('The registration form is not valid!')
-                }
-            
-                const user = {
-                    name: this.user.name,
-                    username: this.user.username,
-                    phone: this.user.phone,
-                    password: this.user.password
-                }
-                const response = await this.$axios.$post('http://localhost:3333/users/register', user);
-                if (response.type === "error") {
-                    return this.$toast.info('There is already an user with this username!')
-                }
-                this.$toast.success('Registration successfully completed!');
-                return this.$router.push("/");
-            } catch (error) {
-                this.$toast.error('An error occurred while registering!');
-            }
+    data() {
+      return {
+        showPassword: false,
+        valid: false,
+        user: {
+          username: null,
+          name: null,
+          phone: null,
+          password: null
         },
+        usernameRules: [
+          v => !!v || 'Nombre de usuario es obligatorio'
+        ],
+        nameRules: [
+          v => !!v || 'Nombre es obligatorio'
+        ],
+        phoneRules: [
+          v => !!v || 'Teléfono es obligatorio'
+        ],
+        passwordRules: [
+          v => !!v || 'Contraseña es obligatoria'
+        ]
+      }
+    },
+  
+    methods: {
+      async persist() {
+        if (!this.valid) {
+          return this.$toast.warning('El formulario de registro no es válido.');
+        }
+  
+        try {
+          const response = await this.$axios.$post('http://localhost:3333/users/register', this.user);
+  
+          if (response.type === 'error') {
+            return this.$toast.info('Ya existe un usuario con este nombre de usuario.');
+          }
+  
+          this.$toast.success('¡Registro completado exitosamente!');
+          return this.$router.push('/');
+        } catch (error) {
+          this.$toast.error('Ocurrió un error durante el registro. Por favor, inténtelo nuevamente más tarde.');
+        }
+      }
     }
-}
+  }
 
-</script>
+
+  </script>
+  
+  <style>
+  .animate-character {
+    text-transform: uppercase;
+    background-image: linear-gradient(
+      -225deg,
+      #231557 0%,
+      #44107a 29%,
+      #ff1361 67%,
+      #fff800 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 5s linear infinite;
+    display: inline-block;
+    font-size: 190px;
+  }
+  
+  @keyframes textclip {
+    0% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+    100% {
+      background-position: 0% center;
+    }
+  }
+  </style>
+  
