@@ -60,7 +60,7 @@
                   :disabled="!valid"
                   type="submit"
                 >
-                  Registrarse
+                  Concluir cadastro
                 </v-btn>
               </v-container>
             </v-form>

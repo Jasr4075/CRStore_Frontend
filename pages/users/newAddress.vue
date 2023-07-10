@@ -1,77 +1,72 @@
-<template>
+    <template>
         <v-container>
-        <h1>New Address</h1>
+        <h1 class="animate-character">Nuevo Endereço</h1>
         <hr>
-        <v-form v-model="valid">
-            <v-container>
-            <v-row>
-                <v-col>
-                <v-text-field
-                    v-model="address.street"
-                    placeholder="Street"
-                    :rules="rule"
-                    required
-                    label="Street"
-                    outlined
-                ></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                <v-text-field
-                    v-model="address.neighborhood"
-                    placeholder="Neighborhood"
-                    :rules="rule"
-                    required
-                    label="Neighborhood"
-                    outlined
-                ></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                <v-text-field
-                    v-model="address.address"
-                    placeholder="Address"
-                    :rules="rule"
-                    required
-                    label="Address"
-                    outlined
-                ></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                <v-text-field
-                    v-model="address.number"
-                    placeholder="Number"
-                    :rules="rule"
-                    required
-                    label="Number"
-                    outlined
-                ></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                <v-text-field
-                    v-model="address.complement"
-                    placeholder="Complement"
-                    :rules="rule"
-                    required
-                    label="Complement"
-                    outlined
-                ></v-text-field>
-                </v-col>
-            </v-row>
+        <v-form v-model="valid" style="border: medium" @submit.prevent="persist">
+            <v-container class="form-container">
+            <v-text-field
+                v-model="address.street"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Rua"
+                prepend-inner-icon="mdi-map-marker"
+                color="#593e99"
+                background-color="#121214"
+            ></v-text-field>
+            <v-text-field
+                v-model="address.neighborhood"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Bairro"
+                prepend-inner-icon="mdi-map-marker"
+                color="#593e99"
+                background-color="#121214"
+            ></v-text-field>
+            <v-text-field
+                v-model="address.address"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Endereço"
+                prepend-inner-icon="mdi-map-marker"
+                color="#593e99"
+                background-color="#121214"
+            ></v-text-field>
+            <v-text-field
+                v-model="address.number"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Número"
+                prepend-inner-icon="mdi-map-marker"
+                color="#593e99"
+                background-color="#121214"
+            ></v-text-field>
+            <v-text-field
+                v-model="address.complement"
+                outlined
+                :rules="rule"
+                required
+                placeholder="Complemento"
+                prepend-inner-icon="mdi-map-marker"
+                color="#593e99"
+                background-color="#121214"
+            ></v-text-field>
+            <v-btn
+                style="background-color: #41356b; margin-top: 5%; margin-left: 35%;"
+                :disabled="!valid"
+                type="submit"
+            >
+                Concluir 
+            </v-btn>
             </v-container>
         </v-form>
-        <v-btn outlined to="/addresses">Cancel</v-btn>
-        <v-btn outlined @click="persist">Save</v-btn>
         </v-container>
-</template>
-
-<script>
+    </template>
+    
+    <script>
     export default {
         name: 'NewAddressPage',
         layout: 'user',
@@ -87,44 +82,73 @@
             complement: null
             },
             rule: [
-            v => !!v || 'Required field'
+            v => !!v || 'Campo obrigatório'
             ]
-        }
-        },
-        created() {
-        if (this.$route?.params?.id) {
-            this.getById(this.$route.params.id);
         }
         },
         methods: {
         async persist() {
-            try {
             if (!this.valid) {
-                return this.$toast.warning('The registration form is not valid!');
+            return this.$toast.warning('O formulário de registro não é válido.');
             }
-            const address = {
-                address: this.address.address,
-                street: this.address.street,
-                neighborhood: this.address.neighborhood,
-                number: this.address.number,
-                complement: this.address.complement
-            };
-            if (!this.address.id) {
-                await this.$api.post('/addresses/persist', address);
-                this.$toast.success('Registration successfully completed!');
-                return this.$router.push('/addresses');
+    
+            try {
+            const response = await this.$axios.$post('http://localhost:3333/users/register', this.user);
+    
+            if (response.type === 'error') {
+                return this.$toast.info('Já existe um usuário com este nome de usuário.');
             }
-            await this.$api.post(`/addresses/persist/${this.address.id}`, address);
-            this.$toast.success('Registration successfully updated!');
-            return this.$router.push('/addresses');
+    
+            this.$toast.success('Registro concluído com sucesso!');
+            return this.$router.push('/');
             } catch (error) {
-            this.$toast.error('An error occurred while registering!');
+            this.$toast.error('Ocorreu um erro durante o registro. Por favor, tente novamente mais tarde.');
             }
-        },
-        async getById(id) {
-            this.address = await this.$api.get(`/addresses/${id}`);
         }
         }
     };
     </script>
     
+    <style>
+    .animate-character {
+        text-transform: uppercase;
+        background-image: linear-gradient(
+        -225deg,
+        #231557 0%,
+        #44107a 29%,
+        #ff1361 67%,
+        #fff800 100%
+        );
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 5s linear infinite;
+        display: inline-block;
+        font-size: 50px;
+    }
+    
+    @keyframes textclip {
+        0% {
+        background-position: 0% center;
+        }
+        50% {
+        background-position: 100% center;
+        }
+        100% {
+        background-position: 0% center;
+        }
+    }
+    
+    .form-container {
+        width: 75%;
+        margin-left: 5%;
+        border-radius: 1%;
+        background-color: #202024;
+        margin-top: 100px;
+        margin-right: 200px;
+        font-size: 25px;
+        padding: 50px;
+    }
+    
+    /* Add any additional styles you may need */
+    </style>
