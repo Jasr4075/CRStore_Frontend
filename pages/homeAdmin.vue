@@ -1,8 +1,7 @@
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <v-app class="font">
-    <v-container>
-      <v-col>
+          <v-col>
         <v-row>
           <v-card
             color="#41356b"

@@ -29,7 +29,7 @@
                 outlined
                 :rules="rule"
                 required
-                placeholder="Endereço"
+                placeholder="CEP"
                 prepend-inner-icon="mdi-map-marker"
                 color="#593e99"
                 background-color="#121214"

@@ -38,14 +38,13 @@
             </v-col>
             <v-col>
                 <v-autocomplete
-              v-model="item.id.Category"
+              v-model="item.idCategory"
               :items="Category"
-              :rules="rule"
+              item-text="name"
+              item-value="id"
               required
               outlined
               label="Category"
-              item-text="name"
-              item-value="id"
             ></v-autocomplete>
             </v-col>
         </v-row>
@@ -89,7 +88,7 @@ export default {
               idCategory: null,
               image: null
           },
-          category: {
+          Category: {
             name: null
           },
           rule: [
@@ -97,7 +96,7 @@ export default {
           ]
         }
     },
-      createdAt () {
+      created () {
 
           if (this.$route?.params?.id) {
           this.getById(this.$route.params.id)
@@ -117,7 +116,7 @@ export default {
           const item = {
             name: this.item.name,
             price: this.item.price,
-            idCategory: this.item.idCategory,
+            Category: this.item.idCategory,
             image: this.item.image
           }
 
@@ -138,7 +137,7 @@ export default {
         this.item = await this.$axios.$get(`http://localhost:3333/items/${id}`);
       },
       async getCategories () {
-        this.category = await this.$axios.$get(`http://localhost:3333/categories`);
+        this.Category = await this.$axios.$get(`http://localhost:3333/categories`);
       }
     }
   }
