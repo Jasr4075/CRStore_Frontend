@@ -88,11 +88,9 @@ export default {
 
       try {
         const response = await this.$axios.$post('http://localhost:3333/users/login', this.user);
-
         if (!response.token) {
           return this.$toast.info('Nome de usuário ou senha inválidos!')
         }
-
         this.$toast.success('Bem-vindo de volta!')
         localStorage.setItem('crstore-api-token', response.token);
         this.validate(response.role);

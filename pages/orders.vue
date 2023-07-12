@@ -44,7 +44,7 @@
             color="green"
             fab
             style="margin-left: 50%"
-            to="/users/newOrder"
+            :to="{ name: 'users-order-newOrder' }"
           >
             <v-icon>
               mdi-plus
@@ -73,27 +73,26 @@ export default {
   data() {
     return {
       headers: [
-  {
-    text: 'Order ID',
-    align: 'center',
-    sortable: true,
-    value: 'id', 
-  },
-  {
-    text: 'Date',
-    align: 'center',
-    sortable: true,
-    value: 'date',
-  },
-  {
-    text: 'Total',
-    align: 'center',
-    sortable: true,
-    value: 'total', 
-  },
-  { text: '', value: 'actions' },
-],
-
+        {
+          text: 'Order ID',
+          align: 'center',
+          sortable: true,
+          value: 'id',
+        },
+        {
+          text: 'Date',
+          align: 'center',
+          sortable: true,
+          value: 'date',
+        },
+        {
+          text: 'Total',
+          align: 'center',
+          sortable: true,
+          value: 'total',
+        },
+        { text: '', value: 'actions' },
+      ],
       orders: [],
       perPage: 10,
       currentPage: 1,
@@ -115,7 +114,7 @@ export default {
   methods: {
     async getOrders() {
       try {
-        const response = await this.$api.get('/orders');
+        const response = await this.$api.get('http://localhost:3333/orders');
         this.orders = response.data;
       } catch (error) {
         this.$toast.error('An error occurred while fetching orders. Please contact the administrator.');
@@ -124,7 +123,7 @@ export default {
     async deleteItem(order) {
       try {
         if (confirm('Do you want to delete this order?')) {
-          await this.$api.delete(`/orders/${order.id}`);
+          await this.$api.delete(`http://localhost:3333/orders/${order.id}`);
           this.$toast.success('Order successfully deleted!');
           await this.getOrders();
         }

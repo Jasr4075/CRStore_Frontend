@@ -64,7 +64,7 @@ export default {
         {
           icon: 'mdi-list-box-outline',
           title: 'Items',
-          to: '/items/index.vue'
+          to: '/items/items'
         },
         {
           icon: 'mdi-shape',
@@ -91,6 +91,11 @@ export default {
           icon: 'mdi-map-marker',
           title: 'Addresses',
           to: '/addresses'
+        },
+        {
+          icon: 'mdi-shape',
+          title: 'Orders',
+          to: '/orders'
         },
         
       ],

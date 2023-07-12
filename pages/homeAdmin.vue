@@ -23,8 +23,7 @@
           </v-card>
         </v-row>
       </v-col>
-    </v-container>
-    <v-container v-if="isEditing" fluid>
+      <v-container v-if="isEditing" fluid>
       <v-row>
         <v-card 
         v-for="item in items"

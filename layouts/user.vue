@@ -68,14 +68,14 @@ export default {
           to: '/users/cart'
         },
         {
-          icon: 'mdi-list-box-outline',
-          title: 'Order',
-          to: '/users/order/Order'
-        },
-        {
           icon: 'mdi-map-marker-outline',
           title: 'My Addresses',
           to: '/addresses'
+        },
+        {
+          icon: 'mdi-list-box-outline',
+          title: 'Orders',
+          to: '/orders'
         },
       ],
       miniVariant: false,
