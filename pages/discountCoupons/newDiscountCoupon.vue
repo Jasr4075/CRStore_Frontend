@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+    <v-container>
     <h1>New Coupon</h1>
     <hr>
     <v-form v-model="valid">
@@ -66,23 +66,23 @@ export default {
     name: 'NewDiscountCouponPage',
     data () {
         return {
-          valid: false,
-          discountCoupon: {
-              id: null,
-              discount: null,
-              coupon: null
-          },
-          rule: [
-              v => !!v || 'Required field'
-          ]
-        }
-    },
-      created () {
-          if (this.$route?.params?.id) {
-          this.getById(this.$route.params.id)
-          }
-      },
-  
+            valid: false,
+            discountCoupon: {
+                id: null,
+                discount: null,
+                coupon: null
+            },
+            rule: [
+                v => !!v || 'Required field'
+            ]
+            }
+        },
+        created () {
+            if (this.$route?.params?.id) {
+            this.getById(this.$route.params.id)
+            }
+        },
+    
     methods: {
         async persist () {
             try {
@@ -99,20 +99,20 @@ export default {
         // por isso ele vai apenas com o objeto da categoria para o cadastro
         // como no final tem um RETURN, ele vai cair fora da função PERSISTIR
         if (!this.discountCoupon.id) {
-          await this.$axios.$post('http://localhost:3333/discountCoupons', discountCoupon);
-          this.$toast.success('Registration successfully completed!');
-          return this.$router.push('/discountCoupons');
+            await this.$axios.$post('http://localhost:3333/discountCoupons', discountCoupon);
+            this.$toast.success('Registration successfully completed!');
+            return this.$router.push('/discountCoupons');
+            }
+            await this.$axios.$post(`http://localhost:3333/discountCoupons/${this.discountCoupon.id}`, discountCoupon);
+            this.$toast.success('Registration successfully updated!');
+            return this.$router.push('/discountCoupons');
+        } catch (error) {
+            this.$toast.error('An error occurred while registering!');
         }
-        await this.$axios.$post(`http://localhost:3333/discountCoupons/${this.discountCoupon.id}`, discountCoupon);
-        this.$toast.success('Registration successfully updated!');
-        return this.$router.push('/discountCoupons');
-      } catch (error) {
-        this.$toast.error('An error occurred while registering!');
-      }
-      },
-      async getById (id) {
-        this.discountCoupon = await this.$axios.$get(`http://localhost:3333/discountCoupons/${id}`);
-      }
+        },
+        async getById (id) {
+            this.discountCoupon = await this.$axios.$get(`http://localhost:3333/discountCoupons/${id}`);
+        }
+        }
     }
-  }
 </script>

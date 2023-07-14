@@ -25,7 +25,7 @@
             >
             <template #[`item.actions`]="{ item }">
                 <v-icon small color="red" @click="deleteUser(item)">
-                mdi-delete
+                    mdi-delete
                 </v-icon>
             </template>
             <template #no-data>

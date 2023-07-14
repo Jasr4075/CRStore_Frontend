@@ -44,7 +44,7 @@
             color="green"
             fab
             style="margin-left: 50%"
-            :to="{ name: 'users-order-newOrder' }"
+            @click="toNewOrderPage"
           >
             <v-icon>
               mdi-plus
@@ -123,7 +123,7 @@ export default {
     async deleteItem(order) {
       try {
         if (confirm('Do you want to delete this order?')) {
-          await this.$api.delete(`http://localhost:3333/orders/${order.id}`);
+          await this.$api.delete(`http://localhost:3333/orders/destroy/${order.id}`);
           this.$toast.success('Order successfully deleted!');
           await this.getOrders();
         }
@@ -139,6 +139,11 @@ export default {
     },
     paginate(page) {
       this.currentPage = page;
+    },
+    initialize() {
+    },
+    toNewOrderPage() {
+      this.$router.push({ name: 'users-order-newOrder' });
     },
   },
 };

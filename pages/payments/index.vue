@@ -32,10 +32,10 @@
     </v-container>
     <v-container>
         <v-data-table
-         :headers="headers"
-         :items="payments"
-         :items-per-page="10"
-         class="elevation-1"
+            :headers="headers"
+            :items="payments"
+            :items-per-page="10"
+            class="elevation-1"
         >
         <template #[`item.actions`]="{ item }">
             <v-icon
